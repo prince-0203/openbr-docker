@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
 RUN apt-get update -y && \
-    apt-get install -y build-essential cmake cmake-curses-gui wget unzip
+    apt-get install -y build-essential cmake cmake-curses-gui wget unzip git qt5-default libqt5svg5-dev qtcreator
 
-WORKDIR /tmp/downloads
+WORKDIR /home
 
 RUN wget -O opencv-2.4.13.zip https://github.com/Itseez/opencv/archive/2.4.13.zip
 
@@ -16,8 +16,6 @@ RUN unzip opencv-2.4.13.zip && \
     make install && \
     cd ../.. && \
     rm -rf opencv-2.4.13*
-
-RUN apt-get install -y git qt5-default libqt5svg5-dev qtcreator
 
 RUN git clone https://github.com/biometrics/openbr.git && \
     cd openbr && \
