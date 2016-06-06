@@ -3,7 +3,7 @@
 A build version of openbiometrics.org to easy use with Docker
 
 ```
-docker pull kevinsimper/openbr
+docker pull prince0203/openbr
 ```
 
 To see an example on how to use this, go to https://github.com/kevinsimper/face-recognition
@@ -11,7 +11,7 @@ To see an example on how to use this, go to https://github.com/kevinsimper/face-
 Run a simple command:
 
 ```
-$ docker run kevinsimper/openbr br -help
+$ docker run prince0203/openbr br -help
 <arg> = Input; {arg} = Output; [arg] = Optional; (arg0|...|argN) = Choice
 
 ==== Core Commands ====
