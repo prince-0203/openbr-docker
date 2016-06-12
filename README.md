@@ -3,7 +3,7 @@
 A build version of openbiometrics.org to easy use with Docker
 
 ```
-docker pull prince0203/openbr
+docker pull prince0203/openbr-docker
 ```
 
 To see an example on how to use this, go to https://github.com/kevinsimper/face-recognition
