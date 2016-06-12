@@ -11,7 +11,7 @@ To see an example on how to use this, go to https://github.com/kevinsimper/face-
 Run a simple command:
 
 ```
-$ docker run prince0203/openbr br -help
+$ docker run prince0203/openbr-docker br -help
 <arg> = Input; {arg} = Output; [arg] = Optional; (arg0|...|argN) = Choice
 
 ==== Core Commands ====
