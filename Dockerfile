@@ -36,5 +36,4 @@ RUN cd openbr && \
 
 # Clean up
 RUN apt-get remove --purge -y wget unzip && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean -y
