@@ -1,14 +1,18 @@
 FROM ubuntu:latest
 
-WORKDIR /home
-
 # Install dependencies
-RUN apt-get update -y && \
-    apt-get install -y build-essential cmake cmake-curses-gui wget unzip git qt5-default libqt5svg5-dev qtcreator
+RUN sed -i'~' -E "s@http://(..\.)?(archive|security)\.ubuntu\.com/ubuntu@http://ftp.jaist.ac.jp/pub/Linux/ubuntu@g" /etc/apt/sources.list && \
+    apt-get update -y && \
+    apt-get install -y build-essential cmake cmake-curses-gui wget unzip git qt5-default libqt5svg5-dev qtcreator && \
+    apt-get clean -y
+
+RUN mkdir -p /home/developer
+ENV HOME /home/developer
+WORKDIR /home/developer
 
 # Download OpenCV
-RUN wget -O opencv-2.4.13.zip https://github.com/Itseez/opencv/archive/2.4.13.zip && \
-    unzip opencv-2.4.13.zip
+RUN wget -nv -O opencv-2.4.13.zip https://github.com/Itseez/opencv/archive/2.4.13.zip && \
+    unzip -q opencv-2.4.13.zip
 
 # Install OpenCV
 RUN cd opencv-2.4.13 && \
@@ -35,5 +39,15 @@ RUN cd openbr && \
     make install
 
 # Clean up
-RUN apt-get remove --purge -y wget unzip && \
-    apt-get clean -y
+RUN apt-get remove --purge -y wget unzip
+
+# Replace 1000 with your user / group id
+RUN export uid=1000 gid=1000 && \
+    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
+    echo "developer:x:${uid}:" >> /etc/group && \
+    mkdir -p /etc/sudoers.d && \
+    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
+    chmod 0440 /etc/sudoers.d/developer && \
+    chown ${uid}:${gid} -R /home/developer && \
+    adduser developer video
+USER developer
