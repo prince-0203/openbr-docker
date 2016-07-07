@@ -6,5 +6,5 @@ services:
   - docker
 
 script:
-  - docker -t openbr .
+  - docker build -t openbr .
   - docker run openbr br -help
