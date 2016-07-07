@@ -1,8 +1,10 @@
 FROM ubuntu:latest
 
+# Use mirror(JAIST) for apt-get
+# RUN sed -i'~' -E "s@http://(..\.)?(archive|security)\.ubuntu\.com/ubuntu@http://ftp.jaist.ac.jp/pub/Linux/ubuntu@g" /etc/apt/sources.list
+
 # Install dependencies
-RUN sed -i'~' -E "s@http://(..\.)?(archive|security)\.ubuntu\.com/ubuntu@http://ftp.jaist.ac.jp/pub/Linux/ubuntu@g" /etc/apt/sources.list && \
-    apt-get update -y && \
+RUN apt-get update -y && \
     apt-get install -y build-essential cmake cmake-curses-gui wget unzip git qt5-default libqt5svg5-dev qtcreator && \
     apt-get clean -y
 
